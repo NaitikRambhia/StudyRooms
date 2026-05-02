@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Room Reservations</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #0d0d0d;
+      color: #f2f2f2;
+    }
+    h1 {
+      text-align: center;
+      color: #ffa64d;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(255,165,0,0.15);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th {
+      background-color: #ff8c1a;
+      color: black;
+      padding: 12px;
+      text-align: left;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+    }
+    tr:hover {
+      background-color: #262626;
+    }
+    button, a {
+      background-color: #ff8c1a;
+      color: black;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover, a:hover {
+      background-color: #e67a00;
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="window.location.href='/'">Home</button>
+
+<div class="container">
+  <h1 th:text="'Reservations for Room ' + ${roomId}"></h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Student</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="r : ${reservations}">
+      <td th:text="${r.studentName}"></td>
+      <td th:text="${#temporals.format(r.startTime, 'MMM dd yyyy, hh:mm a')}"></td>
+      <td th:text="${#temporals.format(r.endTime, 'MMM dd yyyy, hh:mm a')}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <a href="/student/viewRooms">Back to Rooms</a>
+</div>
+
+</body>
+</html>

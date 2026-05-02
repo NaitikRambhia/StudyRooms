@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Rooms</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #0d0d0d;
+      color: #f2f2f2;
+    }
+    h1 {
+      text-align: center;
+      color: #ffa64d;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(255, 165, 0, 0.15);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th {
+      background-color: #ff8c1a;
+      color: black;
+      padding: 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+    }
+    tr:hover {
+      background-color: #262626;
+    }
+    a, button {
+      color: black;
+      background-color: #ff8c1a;
+      padding: 10px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover, a:hover {
+      background-color: #e67a00;
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="window.location.href='/'">Home</button>
+
+<div class="container">
+  <h1>Available Rooms</h1>
+
+  <table id="roomsTable">
+    <thead>
+    <tr>
+      <th onclick="sortTable(0)">Room ID</th>
+      <th onclick="sortTable(1)">Name</th>
+      <th onclick="sortTable(2)">Capacity</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="room : ${rooms}">
+      <td th:text="${room.roomId}"></td>
+      <td th:text="${room.name}"></td>
+      <td th:text="${room.capacity}"></td>
+      <td>
+        <a th:href="@{'/student/roomReservations?roomId=' + ${room.roomId}}"
+           style="background-color:#ff8c1a; color:black; padding:6px 10px; border-radius:6px; text-decoration:none; font-weight:bold;">
+          View Reservations
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <a href="/studentPage">Back to Student Page</a>
+</div>
+
+<script>
+  function sortTable(colIndex) {
+    const table = document.getElementById("roomsTable");
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    const isNumeric = colIndex === 0 || colIndex === 2;
+
+    const sorted = rows.sort((a, b) => {
+      let A = a.cells[colIndex].innerText.trim();
+      let B = b.cells[colIndex].innerText.trim();
+
+      if (isNumeric) {
+        return Number(A) - Number(B);
+      } else {
+        return A.localeCompare(B);
+      }
+    });
+
+    if (tbody.getAttribute("data-sorted") === String(colIndex)) {
+      sorted.reverse();
+      tbody.setAttribute("data-sorted", "");
+    } else {
+      tbody.setAttribute("data-sorted", String(colIndex));
+    }
+
+    sorted.forEach(row => tbody.appendChild(row));
+  }
+</script>
+
+</body>
+</html>

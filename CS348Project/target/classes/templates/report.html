@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<button onclick="window.location.href='/'"
+        style="margin-bottom:20px; background-color:#ff8c1a; color:black; padding:10px; border:none; border-radius:6px; cursor:pointer;">
+  Home
+</button>
+
+<head>
+  <title>Reports</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #0d0d0d; /* deep black */
+      color: #f2f2f2; /* soft white text */
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #ffa64d; /* warm orange */
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #1a1a1a; /* dark gray card */
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(255, 165, 0, 0.15); /* subtle orange glow */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    input, select {
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background-color: #262626;
+      color: #f2f2f2;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ffa64d;
+      box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+    }
+
+    button {
+      padding: 12px;
+      background-color: #ff8c1a; /* bright orange */
+      color: black;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #e67a00; /* darker orange */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th {
+      background-color: #ff8c1a;
+      color: black;
+      padding: 12px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+      color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #262626;
+    }
+  </style>
+
+</head>
+<body>
+
+<h1>Reservation Reports</h1>
+
+<h2>Filter Reservations by Date Range</h2>
+<form action="/report/reservations" method="get">
+  Start Time: <input type="date" name="start"><br>
+  End Time: <input type="date" name="end"><br>
+  <button type="submit">Get Report</button>
+</form>
+</body>
+</html>

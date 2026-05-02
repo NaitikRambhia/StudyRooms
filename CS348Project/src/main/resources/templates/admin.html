@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<button onclick="window.location.href='/'"
+        style="margin-bottom:20px; background-color:#ff8c1a; color:black; padding:10px; border:none; border-radius:6px; cursor:pointer;">
+    Home
+</button>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #0d0d0d; /* deep black */
+            color: #f2f2f2; /* soft white text */
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #ffa64d; /* warm orange */
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #1a1a1a; /* dark gray card */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(255, 165, 0, 0.15); /* subtle orange glow */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        input, select {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background-color: #262626;
+            color: #f2f2f2;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ffa64d;
+            box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            background-color: #ff8c1a; /* bright orange */
+            color: black;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #e67a00; /* darker orange */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #ff8c1a;
+            color: black;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #262626;
+        }
+    </style>
+
+    <title>Admin - Study Rooms</title>
+</head>
+<body>
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("added") === "true") {
+        alert("Room added successfully!");
+    }
+    if (params.get("addError") === "true") {
+        alert("Error: Room ID already exists.");
+    }
+
+    if (params.get("deleteNotFound") === "true") {
+        alert("Error: Room does not exist.");
+    }
+
+    if (params.get("deleteError") === "true") {
+        alert("Error: Room has active reservations and cannot be deleted.");
+    }
+
+    if (params.get("deleted") === "true") {
+        alert("Room deleted successfully!");
+    }
+
+    if (params.get("edited") === "true") {
+        alert("Room updated successfully!");
+    }
+
+    if (params.get("editError") === "true") {
+        alert("Error: Room ID does not exist.");
+    }
+
+</script>
+
+
+<h1>Admin: Manage Study Rooms</h1>
+
+<h2>Add Room</h2>
+<form action="/admin/addRoom" method="post">
+    Room ID: <input type="number" name="roomId"><br>
+    Name: <input type="text" name="name"><br>
+    Capacity: <input type="number" name="capacity"><br>
+    <button type="submit">Add Room</button>
+</form>
+
+
+<h2>Delete Room</h2>
+<form action="/admin/deleteRoom" method="post">
+    Room ID: <input type="number" name="id"><br>
+    <button type="submit">Delete Room</button>
+</form>
+
+<h2>Edit Room</h2>
+<form action="/admin/editRoom" method="post">
+    Room ID: <input type="number" name="roomId"><br>
+    New Name: <input type="text" name="name"><br>
+    New Capacity: <input type="number" name="capacity"><br>
+    <button type="submit">Edit Room</button>
+</form>
+
+
+<h2>View All Rooms</h2>
+<a href="/admin/viewRooms">Click to view rooms</a>
+
+</body>
+</html>
